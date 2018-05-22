@@ -9,7 +9,7 @@ class EstoreDB {
 
     // PDO object
     var $conn = null;
-    var $dbname = 'bookingsdb';
+    var $dbname = 'estoredb';
     var $username = 'root';
     var $password = '';
     var $message = '';
@@ -105,12 +105,12 @@ class EstoreDB {
         return $success;
     }
 
-    function getBooking($id) {
+    function getProduct($ProductID) {
         $record = [];
-        // get record for id
+        // get record for ProductID
         try {
 
-            $statement = $this->conn->query("SELECT * from BOOKINGS where id = $id");
+            $statement = $this->conn->query("SELECT * from PRODUCTS where ProductID = $ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -128,7 +128,7 @@ class EstoreDB {
         return $record;
     }
 
-    function getBookings() {
+    function getProducts() {
 
         // declare array
         $records = [];
@@ -136,7 +136,7 @@ class EstoreDB {
         try {
 
             // create prepared statement
-            $statement = $this->conn->query("SELECT * from BOOKINGS order by id");
+            $statement = $this->conn->query("SELECT * from PRODUCTS order by ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -154,7 +154,7 @@ class EstoreDB {
         return $records;
     }
 
-// end getBookings
+// end getProducts
 
     function searchBookings($keyword) {
 

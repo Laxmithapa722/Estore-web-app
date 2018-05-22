@@ -51,7 +51,7 @@ class ProductsController {
                 $db->close();
 
                 if ($success) {
-                    header('location:?action=getBookings');
+                    header('location:?action=getProducts');
                 }
             } else {
                 include_once('view/addBookingForm.php');
@@ -75,7 +75,7 @@ class ProductsController {
 
         if ($success) {
 
-            header('location:?action=getBookings');
+            header('location:?action=getProducts');
         }
     }
 
@@ -112,7 +112,7 @@ class ProductsController {
 
                 if ($success) {
 
-                    header('location:?action=getBookings');
+                    header('location:?action=getProducts');
                 }
             } else {
                 include_once('view/editBookingForm.php');
@@ -150,25 +150,25 @@ class ProductsController {
             $db->close();
             $numRecords = count($records);
 
-            // $records and $numRecords is referenced in viewBookings
-            include_once('view/viewBookings.php');
+            // $records and $numRecords is referenced in viewProducts
+            include_once('view/viewProducts.php');
         } else {
             include_once('view/searchForm.php');
         }
     }
 
     /**
-     * getBookings function manages data model
+     * getProducts function manages data model
      * and view for retrieving all the booking
      * records
      */
-    function getBookings() {
+    function getProducts() {
         $path = '../';
-        $db = new BookingsDB();
-        $records = $db->getBookings();
+        $db = new EstoreDB();
+        $records = $db->getProducts();
         $db->close();
         $numRecords = count($records);
-        include_once('view/viewBookings.php');
+        include_once('view/viewProducts.php');
     }
     /**
      * validate function 
@@ -178,12 +178,12 @@ class ProductsController {
     private function validate($post) {
         $errors = [];
         $fields = [
-            ['name' => 'firstname', 'valid_type' => 'alpha_spaces', 'required' => true],
-            ['name' => 'lastname', 'valid_type' => 'alpha_spaces', 'required' => true],
-            ['name' => 'email', 'valid_type' => 'email', 'required' => true],
-            ['name' => 'bookingDate', 'valid_type' => 'date', 'required' => true],
-            ['name' => 'bookingTime', 'valid_type' => 'time', 'required' => true],
-            ['name' => 'numPeople', 'valid_type' => 'digits', 'required' => true]
+            ['name' => 'ProductID', 'valid_type' => 'alpha_spaces', 'required' => true],
+            ['name' => 'Description', 'valid_type' => 'alpha_spaces', 'required' => true],
+            ['name' => 'Category', 'valid_type' => 'alpha_spaces', 'required' => true],
+            ['name' => 'Quantity', 'valid_type' => 'digits', 'required' => true],
+            ['name' => 'CostPrice', 'valid_type' => 'digits', 'required' => true],
+            ['name' => 'SellingPrice', 'valid_type' => 'digits', 'required' => true]
         ];
 
         $validation = new Validation();
@@ -296,7 +296,7 @@ class ProductsController {
                         $success = $db->addInvitee($values);
                         $db->close();
                         // redirect user to manage bookings page
-                        header('location:?action=getBookings');
+                        header('location:?action=getProducts');
                     } else {
                         include_once('view/addInviteeForm.php');
                     }

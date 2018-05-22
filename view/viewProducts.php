@@ -4,7 +4,7 @@
 ?>
 <div class="row">
 
-    <div class="col-sm-12 text-center box">View Bookings: <?= $numRecords ?> Results</div>
+    <div class="col-sm-12 text-center box">View Products: <?= $numRecords ?> Results</div>
 
 </div>
 
@@ -16,19 +16,18 @@
             <table class="table table-striped table-hover text-left">
 
                 <tr>
-                    <th>Booking ID</th><th>First Name</th><th>Last Name</th><th>Email</th>
-                    <th>Booking Date</th><th>Booking Time</th><th>People</th><th colspan="4">Manage</th>
+                    <th>ProductID</th><th>Description</th><th>Category</th><th>Quantity</th>
+                    <th>CostPrice</th><th>SellingPrice</th><th colspan="4">Manage</th>
                 </tr>
                 <?php foreach ($records as $row): ?>
 
                     <tr>
-                        <td><?= $row['id'] ?></td>
-                        <td><?= $row['firstname'] ?></td>
-                        <td><?= $row['lastname'] ?></td>
-                        <td><?= $row['email'] ?></td>
-                        <td><?= $row['bookingTime'] ?></td>
-                        <td><?= $row['bookingDate'] ?></td>
-                        <td><?= $row['numPeople'] ?></td>
+                        <td><?= $row['ProductID'] ?></td>
+                        <td><?= $row['Description'] ?></td>
+                        <td><?= $row['Category'] ?></td>
+                        <td><?= $row['Quantity'] ?></td>
+                        <td><?= $row['CostPrice'] ?></td>
+                        <td><?= $row['SellingPrice'] ?></td>                        
                         <td>
                             <a href="?action=viewInvitees&id=<?= $row['id'] ?>" >Invitees</a>
                             &nbsp;

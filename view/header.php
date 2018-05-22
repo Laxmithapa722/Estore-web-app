@@ -55,7 +55,7 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                      <li><a href="?action=getBookings">View Bookings</a></li>
+                      <li><a href="?action=getProducts">View Products</a></li>
                       <li><a href="?action=searchBookings">Search Bookings</a></li>
                      </ul>
                     </li>
