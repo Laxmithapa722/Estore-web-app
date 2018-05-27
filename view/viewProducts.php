@@ -43,7 +43,7 @@
 
                 <tr>
                     <td colspan="10" align="left">
-                        <a href="?action=addBooking"><button class="btn btn-primary btn-lg">Add Booking</button></a>
+                        <a href="?action=addProduct"><button class="btn btn-primary btn-lg">Add Product</button></a>
                     </td>
                 </tr>    
             </table>

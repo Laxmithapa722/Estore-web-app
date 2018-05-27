@@ -20,18 +20,18 @@ class ProductsController {
      * and view for adding a new booking
      * record
      */
-    function addBooking() {
+    function addProduct() {
 
 
         $path = '../';
         // initialise form variables
-        $firstname = $lastname = $email = $bookingDate = $bookingTime = $numPeople = '';
+        $Description = $Category = $Quantity = $CostPrice = $SellingPrice = '';
 
         // if form is submitted
-        if (isset($_POST['addBooking'])) {
+        if (isset($_POST['addProduct'])) {
 
             // remove key value for submit button
-            unset($_POST['addBooking']);
+            unset($_POST['addProduct']);
             // values array is parameter for Model method
             $values = [];
             // assign values to form variables and add values to values array
@@ -40,24 +40,25 @@ class ProductsController {
             }
 
             // validate data in post
-            $errors = $this->validate($_POST);
+            //$errors = $this->validate($_POST);
+            $errors=[];
 
 
             if (count($errors) == 0) {
 
                 // no validation errors proceed to insert new booking
-                $db = new BookingsDB();
-                $success = $db->addBooking($values);
+                $db = new EstoreDB();
+                $success = $db->addProduct($values);
                 $db->close();
 
                 if ($success) {
                     header('location:?action=getProducts');
                 }
             } else {
-                include_once('view/addBookingForm.php');
+                include_once('view/addProductForm.php');
             }
         } else {  // load add form
-            include_once('view/addBookingForm.php');
+            include_once('view/addProductForm.php');
         }
     }
 

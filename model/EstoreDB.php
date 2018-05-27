@@ -24,15 +24,15 @@ class EstoreDB {
         }
     }
 
-    function addBooking($values) {
+    function addProduct($values) {
 
         $success = false;
 
         try {
-            $statement = $this->conn->prepare("insert into Bookings (firstname,
-                                                 lastname, email, bookingDate, 
-                                                 bookingTime, numPeople ) 
-                                                 values (?,?,?,?,?,?)");
+            $statement = $this->conn->prepare("insert into PRODUCTS (Description,
+                                                 Category, Quantity, CostPrice, 
+                                                 SellingPrice) 
+                                                 values (?,?,?,?,?)");
 
             $success = $statement->execute($values);
         } catch (PDOException $ex) {
