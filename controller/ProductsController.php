@@ -196,11 +196,10 @@ class ProductsController {
      * validateInvitee function validates
      * Invitee form data in $_POST array
      */
-    private function validateInvitee($post) {
+    private function validatePhoto($post) {
         $errors = [];
         $fields = [
-            ['name' => 'inviteeName', 'valid_type' => 'alpha_spaces', 'required' => true],
-            ['name' => 'contact', 'valid_type' => 'digits', 'required' => true],
+            ['name' => 'PhotoDescription', 'valid_type' => 'alpha_spaces', 'required' => true],
         ];
         $validation = new Validation();
         $errors = $validation->validate_form_data($fields, $_POST);
@@ -218,30 +217,30 @@ class ProductsController {
 
      /**
      * viewInvitess function manages data model
-     * and view for retrieving all the Invitees
+     * and view for retrieving all the Photos
      * for bookingID
      * records
      */
-    function viewInvitees() {
+    function viewPhotos() {
 
         $path = '../';
-        $bookingID = $_GET['id'];
-        $db = new BookingsDB();
-        $records = $db->getInvitees($bookingID);
+        $ProductID = $_GET['id'];
+        $db = new EstoreDB();
+        $records = $db->getPhotos($ProductID);
         $db->close();
-        include_once('view/viewInvitations.php');
+        include_once('view/viewPhotos.php');
     }
      /**
-     * addInvitees function manages data model
-     * and view for adding a new Invitee
+     * addPhotos function manages data model
+     * and view for adding a new Photo
      * record
      */
-    function addInvitee() {
+    function addPhoto() {
         $path = '../';
-        $bookingID = $_GET['id'];
-        if (isset($_POST['addInvitee'])) {
+        $ProductID = $_GET['id'];
+        if (isset($_POST['addPhoto'])) {
 
-            unset($_POST['addInvitee']);
+            unset($_POST['addPhoto']);
 
             $values = [];
             foreach ($_POST as $key => $value) {
@@ -250,7 +249,7 @@ class ProductsController {
             }
 
 
-            $errors = $this->validateInvitee($_POST);
+            $errors = $this->validatePhoto($_POST);
             $error_messages = [
                 "Upload successful",
                 "File exceeds maximum upload size specified by default",
@@ -282,33 +281,33 @@ class ProductsController {
             if ($errorLevel > 0) {
                 // Set the error message to the errors array
                 $errors['image'] = $error_messages[$errorLevel];
-                include_once('view/addInviteeForm.php');
+                include_once('view/addPhotoForm.php');
             } else {
 
                 if (in_array($type, $permitted)) {
 
                     // add the values to an array
-                    $values = [$inviteeName, $contact, $filename, $bookingID];
+                    $values = [$PhotoDescription, $filename, $ProductID];
 
                     if (count($errors) == 0) {
                         move_uploaded_file($temp_file, $target_file);
-                        $db = new BookingsDB();
-                        $success = $db->addInvitee($values);
+                        $db = new EstoreDB();
+                        $success = $db->addPhoto($values);
                         $db->close();
                         // redirect user to manage bookings page
                         header('location:?action=getProducts');
                     } else {
-                        include_once('view/addInviteeForm.php');
+                        include_once('view/addPhotoForm.php');
                     }
                 } else {
                     $errors['image'] = "$filename type is not permitted";
-                    include_once('view/addInviteeForm.php');
+                    include_once('view/addPhotoForm.php');
                 }
             }  // end if file error
         } else { // No then display the addRecord form
-            include_once('view/addInviteeForm.php');
+            include_once('view/addPhotoForm.php');
         }
     }
 
-// end addInvitee
+// end addPhoto
 } // end class

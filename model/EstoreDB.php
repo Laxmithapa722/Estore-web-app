@@ -200,7 +200,7 @@ class EstoreDB {
         $this->conn = null;
     }
 
-    function getInvitees($bookingID) {
+    function getPhotos($ProductID) {
 
         // declare array
         $records = [];
@@ -208,7 +208,7 @@ class EstoreDB {
         try {
 
             // create prepared statement
-            $statement = $this->conn->query("SELECT * from Invitations where bookingID = $bookingID");
+            $statement = $this->conn->query("SELECT * from PHOTOS where ProductID = $ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -226,14 +226,14 @@ class EstoreDB {
         return $records;
     }
 
-    function addInvitee($values) {
+    function addPhoto($values) {
 
         $success = false;
 
         try {
-            $statement = $this->conn->prepare("insert into invitations (InviteeName,
-                                                 Contact, PhotoFilename, bookingID ) 
-                                                 values (?,?,?,?)");
+            $statement = $this->conn->prepare("insert into PHOTOS (Filename,
+                                                 PhotoDescription, ProductID ) 
+                                                 values (?,?,?)");
 
             $success = $statement->execute($values);
         } catch (PDOException $ex) {

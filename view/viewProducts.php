@@ -29,9 +29,9 @@
                         <td><?= $row['CostPrice'] ?></td>
                         <td><?= $row['SellingPrice'] ?></td>                        
                         <td>
-                            <a href="?action=viewInvitees&id=<?= $row['id'] ?>" >Invitees</a>
+                            <a href="?action=viewPhotos&id=<?= $row['ProductID'] ?>" >Photos</a>
                             &nbsp;
-                            <a href="?action=addInvitee&id=<?= $row['id'] ?>" >+Invitee</a>
+                            <a href="?action=addPhoto&id=<?= $row['ProductID'] ?>" >+Photo</a>
                             &nbsp;
                             <a href="?action=editBooking&id=<?= $row['id'] ?>" >Edit</a>
                             &nbsp;
