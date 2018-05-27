@@ -209,7 +209,7 @@ class ProductsController {
     function viewPhotos() {
 
         $path = '../';
-        $ProductID = $_GET['id'];
+        $ProductID = $_GET['ProductID'];
         $db = new EstoreDB();
         $records = $db->getPhotos($ProductID);
         $db->close();
@@ -222,7 +222,7 @@ class ProductsController {
      */
     function addPhoto() {
         $path = '../';
-        $ProductID = $_GET['id'];
+        $ProductID = $_GET['ProductID'];
         if (isset($_POST['addPhoto'])) {
 
             unset($_POST['addPhoto']);
