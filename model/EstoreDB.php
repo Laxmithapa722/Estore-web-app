@@ -66,35 +66,16 @@ class EstoreDB {
         return $userID;
     }
 
-    function deleteBooking($id) {
-        $success = false;
-        try {
-
-
-
-            $statement = $this->conn->prepare("delete from bookings where id  =  $id");
-
-            $success = $statement->execute();
-
-            // we should check if success
-            // close the connection
-            $conn = null;
-        } catch (PDOException $ex) {
-            $message = $ex->getMessage();
-            $this->showMessage($message);
-        }
-
-        return $success;
-    }
-
-    function editBooking($values, $id) {
+    
+    
+    function editProduct($values, $ProductID) {
 
         $success = false;
         try {
-            $statement = $this->conn->prepare("Update Bookings set firstname = ?, 
-                                                          lastname = ?, email = ?, bookingDate = ?,
-                                                          bookingTime = ?, numPeople = ?
-                                                          where id = $id");
+            $statement = $this->conn->prepare("Update PRODUCTS set Description = ?, 
+                                                          Category = ?, Quantity = ?, CostPrice = ?,
+                                                          SellingPrice = ?
+                                                          where ProductID = $ProductID");
 
             $success = $statement->execute($values);
         } catch (PDOException $ex) {
@@ -104,6 +85,7 @@ class EstoreDB {
 
         return $success;
     }
+
 
     function getProduct($ProductID) {
         $record = [];

@@ -62,23 +62,7 @@ class ProductsController {
         }
     }
 
-    /**
-     * deleteBooking
-     * Manages data model and view for 
-     * deleting a bookings record
-     */
-    function deleteBooking() {
-        $path = '../';
-        $id = $_GET['id'];
-        $db = new BookingsDB();
-        $success = $db->deleteBooking($id);
-        $db->close();
-
-        if ($success) {
-
-            header('location:?action=getProducts');
-        }
-    }
+  
 
    /**
      * editooking function manages data model
@@ -86,29 +70,32 @@ class ProductsController {
      * record
      */
 
-    function editBooking() {
+   
+    
+    function editProduct() {
         $path = '../';
-        $firstname = $lastname = $email = $bookingDate = $bookingTime = $numPeople = '';
+        $Description = $Category = $Quantity = $CostPrice = $SellingPrice = '';
 
-        $id = $_GET['id'];
+        $ProductID = $_GET['ProductID'];
 
-        if (isset($_POST['editBooking'])) {
+        if (isset($_POST['editProduct'])) {
 
-            // remove id and submit button key/value pairs from post
-            unset($_POST['editBooking']);
-            unset($_POST['id']);
+            // remove ProductID and submit button key/value pairs from post
+            unset($_POST['editProduct']);
+            unset($_POST['ProductID']);
             $values = [];
             foreach ($_POST as $key => $value) {
                 $value = trim($value);
                 ${$key} = $value;
                 $values[] = $value;
             }
-            $errors = $this->validate($_POST);
+            //$errors = $this->validate($_POST);
+            $errors =[];
 
             if (count($errors) == 0) {
 
-                $db = new BookingsDB();
-                $success = $db->editBooking($values, $id);
+                $db = new EstoreDB();
+                $success = $db->editProduct($values, $ProductID);
                 $db->close();
 
                 if ($success) {
@@ -116,24 +103,25 @@ class ProductsController {
                     header('location:?action=getProducts');
                 }
             } else {
-                include_once('view/editBookingForm.php');
+                include_once('view/editProductForm.php');
             }
         } else {
 
             // declare record 
             $record = [];
-            $db = new BookingsDB();
-            $record = $db->getBooking($id);
+            $db = new EstoreDB();
+            $record = $db->getProduct($ProductID);
             $db->close();
 
             foreach ($record as $key => $value) {
                 ${$key} = $value;
             }
 
-            // display populated Booking form
-            include_once('view/editBookingForm.php');
+            // display populated Product form
+            include_once('view/editProductForm.php');
         }
     }
+    
     /**
      * searchBookings function manages data model
      * and view for searching booking records

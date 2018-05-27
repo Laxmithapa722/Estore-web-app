@@ -29,13 +29,12 @@
                         <td><?= $row['CostPrice'] ?></td>
                         <td><?= $row['SellingPrice'] ?></td>                        
                         <td>
-                            <a href="?action=viewPhotos&id=<?= $row['ProductID'] ?>" >Photos</a>
+                            <a href="?action=viewPhotos&ProductID=<?= $row['ProductID'] ?>" >Photos</a>
                             &nbsp;
-                            <a href="?action=addPhoto&id=<?= $row['ProductID'] ?>" >+Photo</a>
+                            <a href="?action=addPhoto&ProductID=<?= $row['ProductID'] ?>" >+Photo</a>
                             &nbsp;
-                            <a href="?action=editBooking&id=<?= $row['id'] ?>" >Edit</a>
-                            &nbsp;
-                            <a href="?action=deleteBooking&id=<?= $row['id'] ?>" >Delete</a>
+                            <a href="?action=editProduct&ProductID=<?= $row['ProductID'] ?>" >Edit</a>
+                            
                         </td>
                     </tr>
 
