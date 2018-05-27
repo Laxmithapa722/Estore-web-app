@@ -66,8 +66,7 @@ class EstoreDB {
         return $userID;
     }
 
-    
-    
+
     function editProduct($values, $ProductID) {
 
         $success = false;
@@ -85,7 +84,6 @@ class EstoreDB {
 
         return $success;
     }
-
 
     function getProduct($ProductID) {
         $record = [];
@@ -138,22 +136,21 @@ class EstoreDB {
 
 // end getProducts
 
-    function searchBookings($keyword) {
+    function searchProduct($keyword) {
 
         // declare array
         $records = [];
 
         try {
 
-            $statement = $this->conn->query("SELECT * from BOOKINGS 
+            $statement = $this->conn->query("SELECT * from PRODUCTS 
                                            where 
-                                           firstname like '%$keyword%' or
-                                           lastname like '%$keyword%' or
-                                           email like '%$keyword%' or
-                                           bookingDate like '%$keyword%' or
-                                           bookingTime like '%$keyword%' or
-                                           numPeople like '%$keyword%' 
-                                           order by id");
+                                           (Description like '%$keyword%' or
+                                           Category like '%$keyword%' or
+                                           Quantity like '%$keyword%' or
+                                           CostPrice like '%$keyword%' or
+                                           SellingPrice like '%$keyword%') 
+                                           order by ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);

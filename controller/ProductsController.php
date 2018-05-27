@@ -62,16 +62,13 @@ class ProductsController {
         }
     }
 
-  
 
    /**
-     * editooking function manages data model
-     * and view for editig an existing booking
+     * edit booking function manages data model
+     * and view for editing an existing booking
      * record
      */
 
-   
-    
     function editProduct() {
         $path = '../';
         $Description = $Category = $Quantity = $CostPrice = $SellingPrice = '';
@@ -121,21 +118,20 @@ class ProductsController {
             include_once('view/editProductForm.php');
         }
     }
-    
     /**
      * searchBookings function manages data model
      * and view for searching booking records
      * record
      */
-    function searchBookings() {
+    function searchProduct() {
         $path = '../';
 
-        if (isset($_POST['searchBookings'])) {
+        if (isset($_POST['searchProduct'])) {
 
             $keyword = $_POST['keyword'];
 
-            $db = new BookingsDB();
-            $records = $db->searchBookings($keyword);
+            $db = new EstoreDB();
+            $records = $db->searchProduct($keyword);
             $db->close();
             $numRecords = count($records);
 
