@@ -24,18 +24,7 @@
 
                 <input class="form-control" type="text" name="PhotoDescription" value="<?=isset($PhotoDescription)? $PhotoDescription:''; ?>" />
             </div>
-    
-            <div class="form-group">
-                <label class="control-label" for="PhotoDescription">
-                    Photo Description
-                    <small class="text-danger">
-                        <?=isset($errors['PhotoDescription'])? $errors['PhotoDescription']:''; ?>
-                    </small>
-                
-                </label>
 
-                <input class="form-control" type="text" name="PhotoDescription" value="<?=isset($PhotoDescription)? $PhotoDescription: ''; ?>" />
-            </div>
              <div class="form-group">
                 <label class="control-label" for="image">
                     Product Photo
@@ -49,7 +38,7 @@
             </div>
             
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary btn-block" name="addInvitee" />
+                <input type="submit" value="Save" class="btn btn-primary btn-block" name="addPhoto" />
             </div>
         </form>
     </div>

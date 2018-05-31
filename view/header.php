@@ -56,7 +56,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                       <li><a href="?action=getProducts">View Products</a></li>
-                      <li><a href="?action=searchProduct">Search Products</a></li>
+                      <li><a href="?action=searchProducts">Search Products</a></li>
                      </ul>
                     </li>
                   <li class="active"><a href="?action=logout">Logout</a></li>

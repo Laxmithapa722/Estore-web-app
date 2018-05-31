@@ -31,8 +31,8 @@ class EstoreDB {
         try {
             $statement = $this->conn->prepare("insert into PRODUCTS (Description,
                                                  Category, Quantity, CostPrice, 
-                                                 SellingPrice) 
-                                                 values (?,?,?,?,?)");
+                                                 SellingPrice,UserID) 
+                                                 values (?,?,?,?,?,?)");
 
             $success = $statement->execute($values);
         } catch (PDOException $ex) {
@@ -108,7 +108,7 @@ class EstoreDB {
         return $record;
     }
 
-    function getProducts() {
+    function getProducts($userID) {
 
         // declare array
         $records = [];
@@ -116,7 +116,7 @@ class EstoreDB {
         try {
 
             // create prepared statement
-            $statement = $this->conn->query("SELECT * from PRODUCTS order by ProductID");
+            $statement = $this->conn->query("SELECT * from PRODUCTS where UserID = $userID order by ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -136,7 +136,7 @@ class EstoreDB {
 
 // end getProducts
 
-    function searchProduct($keyword) {
+    function searchProducts($keyword,$userID) {
 
         // declare array
         $records = [];
@@ -150,7 +150,7 @@ class EstoreDB {
                                            Quantity like '%$keyword%' or
                                            CostPrice like '%$keyword%' or
                                            SellingPrice like '%$keyword%') 
-                                           order by ProductID");
+                                           and UserID = $userID order by ProductID");
 
             // we want to fetch an associative array  ie key => value
             $statement->setFetchMode(PDO::FETCH_ASSOC);

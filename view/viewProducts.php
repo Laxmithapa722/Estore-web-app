@@ -17,7 +17,7 @@
 
                 <tr>
                     <th>ProductID</th><th>Description</th><th>Category</th><th>Quantity</th>
-                    <th>CostPrice</th><th>SellingPrice</th><th colspan="4">Manage</th>
+                    <th>CostPrice</th><th>SellingPrice</th><th colspan="3">Manage</th>
                 </tr>
                 <?php foreach ($records as $row): ?>
 

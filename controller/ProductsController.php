@@ -24,6 +24,9 @@ class ProductsController {
 
 
         $path = '../';
+        
+        $userID = $_SESSION['userID'];
+        
         // initialise form variables
         $Description = $Category = $Quantity = $CostPrice = $SellingPrice = '';
 
@@ -38,10 +41,13 @@ class ProductsController {
             foreach ($_POST as $key => $value) {
                 $values[] = ${$key} = trim($value);
             }
+            
+            $values[] = $userID;
 
             // validate data in post
-            //$errors = $this->validate($_POST);
-            $errors=[];
+            $errors = $this->validate($_POST);
+            //$errors=[];
+           
 
 
             if (count($errors) == 0) {
@@ -86,8 +92,8 @@ class ProductsController {
                 ${$key} = $value;
                 $values[] = $value;
             }
-            //$errors = $this->validate($_POST);
-            $errors =[];
+            $errors = $this->validate($_POST);
+            //$errors =[];
 
             if (count($errors) == 0) {
 
@@ -123,15 +129,16 @@ class ProductsController {
      * and view for searching booking records
      * record
      */
-    function searchProduct() {
+    function searchProducts() {
         $path = '../';
+        $userID = $_SESSION['userID'];
 
-        if (isset($_POST['searchProduct'])) {
+        if (isset($_POST['searchProducts'])) {
 
             $keyword = $_POST['keyword'];
 
             $db = new EstoreDB();
-            $records = $db->searchProduct($keyword);
+            $records = $db->searchProducts($keyword,$userID);
             $db->close();
             $numRecords = count($records);
 
@@ -148,9 +155,10 @@ class ProductsController {
      * records
      */
     function getProducts() {
+        $userID = $_SESSION['userID'];
         $path = '../';
         $db = new EstoreDB();
-        $records = $db->getProducts();
+        $records = $db->getProducts($userID);
         $db->close();
         $numRecords = count($records);
         include_once('view/viewProducts.php');
@@ -163,12 +171,12 @@ class ProductsController {
     private function validate($post) {
         $errors = [];
         $fields = [
-            ['name' => 'ProductID', 'valid_type' => 'alpha_spaces', 'required' => true],
-            ['name' => 'Description', 'valid_type' => 'alpha_spaces', 'required' => true],
+            
+            ['name' => 'Description', 'valid_type' => 'alpha_num_spaces', 'required' => true],
             ['name' => 'Category', 'valid_type' => 'alpha_spaces', 'required' => true],
             ['name' => 'Quantity', 'valid_type' => 'digits', 'required' => true],
-            ['name' => 'CostPrice', 'valid_type' => 'digits', 'required' => true],
-            ['name' => 'SellingPrice', 'valid_type' => 'digits', 'required' => true]
+            ['name' => 'CostPrice', 'valid_type' => 'decimal', 'required' => true],
+            ['name' => 'SellingPrice', 'valid_type' => 'decimal', 'required' => true]
         ];
 
         $validation = new Validation();
@@ -260,7 +268,7 @@ class ProductsController {
             $errorLevel = $_FILES["image"]["error"];
 
             // define the upload directory destination
-            $destination = $web_path.'/photos/';
+            $destination = $path.'photos/';
             $target_file = $destination . $filename;
 
             if ($errorLevel > 0) {
@@ -272,7 +280,8 @@ class ProductsController {
                 if (in_array($type, $permitted)) {
 
                     // add the values to an array
-                    $values = [$PhotoDescription, $filename, $ProductID];
+                    $values = [$filename, $PhotoDescription, $ProductID];
+                  
 
                     if (count($errors) == 0) {
                         move_uploaded_file($temp_file, $target_file);
